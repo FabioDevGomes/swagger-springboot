@@ -1,0 +1,25 @@
+swagger: '2.0'
+info: 
+  version: '1.0.0'
+  title: 'Cliente API'
+  description: ' |
+  Esta api tem o objetivo de permiti um CRUD de clientes
+    [teste com link](https://www.linkedin.com/in/f%C3%A1bio-ivan-49986541/)
+  
+  '
+consumes:
+ - application/json
+produces:
+ - application/json
+tags:
+  - name: 'Consulta'
+  - name: 'Cadastro'
+  - name: 'Manutanção'
+  - name: 'Exclusão'
+  - name: 'API'
+#montanto a url
+host: localhost
+basePath: /fabioivanov/client_api/1.0.0
+schemes: 
+ - http
+ - https
