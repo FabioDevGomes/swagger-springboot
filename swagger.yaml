@@ -29,7 +29,7 @@ paths:
       tags:
         - Consulta
       summary: 'Consulta todos os clientes'
-      operationId: 'consulltarTodos'
+      operationId: consultarTodos
       description: 'Esta operação tem por objetivo consultar todos os cliente cadastrados'
       responses:
         200:
@@ -44,6 +44,29 @@ paths:
           description: Página não encontrada
         500:
           description: Erro interno ao tentar realizar a consulta
+  /cliente:
+    post:
+      tags: 
+        - Cadastro
+      summary: Cadastro de um novo cliente 
+      operationId: cadastrarCliente
+      description: Esta operação tem por objetivo cadastrar um novo cliente
+      parameters:
+        - in: body
+          required: true
+          name: cliente
+          schema: 
+            $ref: '#/definitions/Cliente'
+      responses:
+        201:
+          description: Sucesso ao cadastrar o novo cliente
+        400:
+          description: Cadastro inválido
+        401:
+          description: Cadastro não autorizado
+        500:
+          description: Erro interno ao tentar cadastrar um cliente
+    
 definitions:
   Clientes:
     type: array
