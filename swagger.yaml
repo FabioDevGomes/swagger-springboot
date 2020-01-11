@@ -23,3 +23,75 @@ basePath: /fabioivanov/client_api/1.0.0
 schemes: 
  - http
  - https
+paths:
+  /clientes:
+    get:
+      tags:
+        - Consulta
+      summary: 'Consulta todos os clientes'
+      operationId: 'consulltarTodos'
+      description: 'Esta operação tem por objetivo consultar todos os cliente cadastrados'
+      responses:
+        200:
+          description: Sucesso ao consultar todos os clientes
+          schema:
+            $ref: '#/definitions/Clientes'
+        400:
+          description: Consulta inválida
+        401:
+          description: Consulta não autorizada
+        404:
+          description: Página não encontrada
+        500:
+          description: Erro interno ao tentar realizar a consulta
+definitions:
+  Clientes:
+    type: array
+    items:
+      $ref: '#/definitions/Cliente'
+  Cliente:
+    type: object
+    properties:
+      id: 
+        type: integer
+        format: int32
+        description: Identificador do cliente
+      nome:
+        type: string
+        description: Nome do cliente
+      sobrenome:
+        type: string
+        description: Sobrenome do cliente
+      iniciais:
+        type: string
+        description: Iniciais do cliente
+        minLength: 2
+        maxLength: 5
+      dataNascimento:
+        type: string
+        format: date
+        description: Data de nascimento do cliente
+      dataAtualizacao:
+        type: string
+        format: date-time
+        description: Data de atualização dos dados do cliente
+      status:
+        type: boolean
+        description: Status ativo ou inativo do cliente
+      tipo:
+        type: string
+        enum: [interno, externo]
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
