@@ -44,6 +44,7 @@ paths:
           description: Página não encontrada
         500:
           description: Erro interno ao tentar realizar a consulta
+          
   /cliente:
     post:
       tags: 
@@ -60,12 +61,53 @@ paths:
       responses:
         201:
           description: Sucesso ao cadastrar o novo cliente
+          schema:
+            $ref: '#/definitions/Cliente'
+          headers:
+            Location:
+              type: 'string'
+              description: 'URI do cliente alterado'
         400:
           description: Cadastro inválido
         401:
           description: Cadastro não autorizado
         500:
           description: Erro interno ao tentar cadastrar um cliente
+          
+  /cliente/{id}:
+    put:
+      tags:
+        - Manutanção
+      summary: Altera im cliente existente
+      operationId: alterarExistente
+      description: Esta operação tem por objetivo alterar um cliente existente
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int32
+          required: true
+          description: Id do cliente
+        - in: body
+          name: objeto clente
+          required: true
+          schema:
+            $ref: '#/definitions/Cliente'
+      responses:
+        202:
+          description: Sucesso ao alterar um cliente
+          schema:
+            $ref: '#/definitions/Cliente'
+          headers:
+            Location:
+              type: 'string'
+              description: 'URI do cliente alterado'
+        400:
+          description: Alteração inválida
+        401:
+          description: Alteração não autorizada
+        500:
+          description: Erro interno ao tentar realizar a auteração
     
 definitions:
   Clientes:
