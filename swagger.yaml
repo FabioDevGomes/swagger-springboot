@@ -89,7 +89,7 @@ paths:
           required: true
           description: Id do cliente
         - in: body
-          name: objeto clente
+          name: cliente
           required: true
           schema:
             $ref: '#/definitions/Cliente'
