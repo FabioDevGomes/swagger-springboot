@@ -108,7 +108,126 @@ paths:
           description: Alteração não autorizada
         500:
           description: Erro interno ao tentar realizar a auteração
-    
+    get:
+      tags:
+        - Consulta
+      summary: Consulta um cliente existente por ID
+      operationId: consultaPorId
+      description: Essa consulta tem por objetivo retornar um cliente existente pelo seu Id
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          required: true
+          description: Valor do id do cliente
+      responses:
+        200:
+          description: Sucesso ao consultar um cliente por id
+          schema:
+            $ref: '#/definitions/Cliente'
+        400:
+          description: Consulta inválida
+        401:
+          description: Consulta não autorizada
+        404:
+          description: Nenhum cliente encontrado para esse Id
+        500:
+          description: Erro interno ao tentar consultar pelo Id
+    delete:
+      tags:
+        - Exclusão
+      summary: Excluir cliente existente
+      description: Esse endpoint tem por objetivo excluir um cliente existente
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int32
+          required: true
+          description: Número do id do cliente a ser excluído
+      responses:
+        204:
+          description: Sucesso ao exlcuuir o cliente
+        400:
+          description: Exclusão inválida
+        401:
+          description: Exclusão não autorizada
+        500:
+          description: Erro interno ao tentar realizar a exclusão
+  /cliente/consulta/{sobrenome}:
+    get:
+      tags:
+       - Consulta
+      summary: Consulta cliente existente pelo sobrenome
+      operationId: ConsultaPorSobrenome
+      description: Esta operação tem por objetivo consultar um cliente existente a partir de seu sobrenome
+      parameters:
+        - in: path
+          name: sobrenome
+          type: string
+          required: true
+          description: Sobrenome do cliente
+      responses:
+        200:
+          description: Sucesso ao consultar o cliente pelo seu sobrenome
+          schema:
+            $ref: '#/definitions/Cliente'
+        400:
+          description: Consulta inválida
+        401:
+          description: Consulta não autorizada
+        404:
+          description: Nenhum cliente encontrado para essa consulta
+        500:
+          description: Erro interno ao tentar consultar o cliennte pelo sobrenome
+  /cliente/{status}/{id}:
+    put:
+      tags:
+        - Manutanção
+      summary: Alteração de status por id
+      operationId: alterarStatusPorId
+      description: Esta operação tem por objetivo alterar o status do cliente pelo seu id
+      parameters:
+        - in: path
+          name: status
+          required: true
+          type: string
+          enum: [ativo, inativo]
+          description: Status do cliente
+        - in: path
+          name: id
+          required: true
+          type: integer
+          format: int32
+          description: Valor do id do cliente
+      responses:
+        202:
+          description: Sucesso ao alterar o status do cliente
+          schema:
+            $ref: '#/definitions/Cliente'
+          headers:
+            Location:
+              type: 'string'
+              description: 'URI do cliente alterado'
+        400:
+          description: Alteração de status inválida
+        401:
+          description: Alteração de status não autorizada
+        404:
+          description: Cliente para alteração de status não encontrado
+  /readme:
+    get:
+      tags:
+        - API
+      summary: Recupera Readme da API
+      operationId: readme
+      description: Esse endpoitn retorno o readme da API
+      responses:
+        200:
+          description: Sucesso ao recuperar o readme da API
+        500:
+          description: Erro interno ao tentar recuperar o readme da API
+
 definitions:
   Clientes:
     type: array
